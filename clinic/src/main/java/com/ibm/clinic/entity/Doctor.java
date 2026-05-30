@@ -20,6 +20,10 @@ public class Doctor {
 
     private String name;
 
+    private String email;
+
+    private String password;
+
     private String specialty;
 
     @ElementCollection

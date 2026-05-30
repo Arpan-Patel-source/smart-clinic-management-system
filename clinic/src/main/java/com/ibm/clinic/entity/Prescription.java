@@ -1,14 +1,11 @@
 package com.ibm.clinic.entity;
 
-import java.time.LocalDateTime;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.FutureOrPresent;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,18 +14,20 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Appointment {
+public class Prescription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    private Doctor doctor;
-
-    @ManyToOne
     private Patient patient;
 
-    @NotNull
-    @FutureOrPresent
-    private LocalDateTime appointmentTime;
+    @ManyToOne
+    private Doctor doctor;
+
+    @NotBlank(message = "Medicine name is required")
+    private String medicine;
+
+    @NotBlank(message = "Instructions are required")
+    private String instructions;
 }
